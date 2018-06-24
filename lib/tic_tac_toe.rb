@@ -45,16 +45,16 @@ class TicTacToe
     end
   end
   
-  def turn(board)
+  def turn
     puts "Please enter 1-9:"
     input = gets.strip
     index = input_to_index(input)
-    player = current_player(board)
+    player = current_player
     if valid_move?(board, index)
       move(board, index, player)
-      display_board(board)
+      display_board
     else
-      turn(board)
+      turn
     end
   end
   
@@ -69,25 +69,25 @@ class TicTacToe
     [2,4,6], # Right diagonal
   ]
   
-  def won?(board)
+  def won?
     won = FALSE
     WIN_COMBINATIONS.each do |combo|
-      if board[combo[0]] == "X" && board[combo[1]] == "X" && board[combo[2]] == "X"
+      if @board[combo[0]] == "X" && @board[combo[1]] == "X" && @board[combo[2]] == "X"
         won = combo
-      elsif board[combo[0]] == "O" && board[combo[1]] == "O" && board[combo[2]] == "O"
+      elsif @board[combo[0]] == "O" && @board[combo[1]] == "O" && @board[combo[2]] == "O"
         won = combo
       end
     end
     won
   end
   
-  def full?(board)
-    board.all?{|item| item == "X" || item == "O"}
+  def full?
+    @board.all?{|item| item == "X" || item == "O"}
   end
   
-  def draw?(board)
-    full = full?(board)
-    won = won?(board)
+  def draw?
+    full = full?
+    won = won?
     if full && !(won)
       TRUE
     elsif won
@@ -97,19 +97,19 @@ class TicTacToe
     end
   end
   
-  def over?(board)
-    if won?(board) || draw?(board) || full?(board)
+  def over?
+    if won? || draw? || full?
       TRUE
     else
       FALSE
     end
   end
   
-  def winner(board)
+  def winner
     winner = nil
-    won = won?(board)
+    won = won?
     if won != FALSE
-      if board[won[0]] == "X"
+      if @board[won[0]] == "X"
         winner = "X"
       else
         winner = "O"
@@ -118,13 +118,13 @@ class TicTacToe
     winner
   end
   
-  def play(board)
-    until over?(board)
-      turn(board)
+  def play
+    until over?
+      turn
     end
-    if won?(board)
-      puts "Congratulations #{winner(board)}!"
-    elsif draw?(board)
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
       puts "Cat's Game!"
     end
   end
