@@ -2,7 +2,7 @@
 require 'pry'
 require_relative '../lib/tic_tac_toe.rb'
 
-board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+board = Array.new(9," ")
 
 puts "Welcome to Tic Tac Toe!"
 TicTacToe.display_board(board)
