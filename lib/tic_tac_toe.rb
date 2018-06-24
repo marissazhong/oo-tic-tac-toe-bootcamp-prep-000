@@ -14,16 +14,16 @@ class TicTacToe
     user_input.to_i - 1
   end
   
-  def move(board, index, current_player)
+  def move(index, current_player)
     @board[index] = current_player
   end
   
-  def position_taken?(board, location)
-    board[location] != " " && board[location] != ""
+  def position_taken?(location)
+    @board[location] != " " && @board[location] != ""
   end
   
-  def valid_move?(board, index)
-    index.between?(0,8) && !position_taken?(board, index)
+  def valid_move?(index)
+    index.between?(0,8) && !position_taken?(index)
   end
   
   def turn_count
@@ -50,8 +50,8 @@ class TicTacToe
     input = gets.strip
     index = input_to_index(input)
     player = current_player
-    if valid_move?(board, index)
-      move(board, index, player)
+    if valid_move?(index)
+      move(index, player)
       display_board
     else
       turn
